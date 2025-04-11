@@ -1,0 +1,11 @@
+fastapi==0.115.12
+pandas==2.2.3
+requests==2.32.3
+PyPDF2==3.0.1
+googletrans==4.0.0-rc.1
+numpy
+pydantic==2.10.6
+uvicorn==0.34.0
+httpcore==0.9.1
+openpyxl==3.1.5
+python-multipart==0.0.20

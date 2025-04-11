@@ -13,15 +13,16 @@ from pydantic import BaseModel
 app = FastAPI()
 
 # مسیرهای ثابت
-DATA_DIR = "/media/arshia/TEMP/data"
-SYSTEM_DIR = "/media/arshia/TEMP/system"
-KNOWLEDGE_DIR = "/media/arshia/TEMP/knowledge"
-CONVERS_DIR = "/media/arshia/TEMP/conversation"
+DATA_DIR = r"C:\Users\seyed\OneDrive\Desktop\Inernational Gym Platform\data"
+SYSTEM_DIR = r"C:\Users\seyed\OneDrive\Desktop\Inernational Gym Platform\system"
+KNOWLEDGE_DIR = r"C:\Users\seyed\OneDrive\Desktop\Inernational Gym Platform\knowledge"
+SUMMARY_DIR = r"C:\Users\seyed\OneDrive\Desktop\Inernational Gym Platform\summary"
+CONVERS_DIR = r"C:\Users\seyed\OneDrive\Desktop\Inernational Gym Platform\conversation"
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(KNOWLEDGE_DIR, exist_ok=True)
 
 # -------------------- مدل Google Gemini --------------------
-GEMINI_API_KEY = "AIzaSyDp5_hYaoSL2gW9L-UyhclBaBEtAI_4roo"  # توکن API معتبر خود را وارد کنید
+GEMINI_API_KEY = "AIzaSyDBhUuf41mVe-wZd9SoR1BFSX8T_YtkyRI"  # توکن API معتبر خود را وارد کنید
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY
 
 def query_gemini_model(user_message: str):
@@ -195,7 +196,7 @@ def summarize_all_pdfs():
                     raise HTTPException(status_code=500, detail=f"Error summarizing {pdf_file}: {str(e)}")
 
     # ذخیره خلاصه‌ها در یک فایل JSON
-    knowledge_json_path = os.path.join(DATA_DIR, "knowledge.json")
+    knowledge_json_path = os.path.join(SUMMARY_DIR, "knowledge.json")
     with open(knowledge_json_path, "w", encoding="utf-8") as json_file:
         json.dump(summaries, json_file, ensure_ascii=False, indent=4)
 
@@ -214,11 +215,6 @@ def translate_summary(summary: str, language_code: str) -> str:
 translator = Translator()
 
 tones=["friendly", "Sincerely", "seriously"]
-import os
-import json
-
-import os
-import json
 
 @app.post("/user/chat")
 def chat_with_model(chat_data: dict = Body(...)):
